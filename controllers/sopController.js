@@ -2,7 +2,7 @@ const openAI = require("openai");
 const nodemailer = require("nodemailer");
 const { openaiApiKey } = require("../config");
 
-const openaiPompt = new openAI({ apiKey: openaiApiKey });
+const openaiPrompt = new openAI({ apiKey: openaiApiKey });
 
 async function generateSOP(data) {
   const {
@@ -39,9 +39,10 @@ async function generateSOP(data) {
     `;
 
   try {
-    const response = await openaiPompt.completions.create({
+    const response = await openaiPrompt.completions.create({
       prompt,
       max_tokens: 400,
+      "model":"text-davinci-002",
     });
     const generatedSOP = response.choices[0].text.trim();
     return generatedSOP;
